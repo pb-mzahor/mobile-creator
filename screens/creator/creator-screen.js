@@ -13,31 +13,39 @@ import {
 
 import {
   Button,
-} from 'react-native-elements'
+  Card,
+} from 'react-native-elements';
+
+import CreateButton from '../../components/create-button';
+import ParticlePicker from '../../components/particle-picker';
 
 export default class CreatorScreen extends React.Component {
   constructor(props) {
     super(props);
     this.create = this.create.bind(this);
+    this.state = {
+      images: [],
+    }
   }
 
   async create() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     if (status === 'granted') {
-      ImagePicker.launchImageLibraryAsync();
+      const image = await ImagePicker.launchImageLibraryAsync();
+      this.setState(prevState => ({
+        images: [...prevState.images, image],
+      }))
     }
   }
 
   render() {
     return (
       <SafeAreaView style={styles.mainView}>
-        <Text>Create your own story</Text>
-        <Button title="Add new particle"
-          onPress={this.create}
-          backgroundColor="#87aeff"
-          borderRadius={10}
-          style={styles.createButton}
-        />
+        <Text>Hello</Text>
+        <View style={styles.particlePicker}>
+          <ParticlePicker />
+        </View>
+        <CreateButton />
       </SafeAreaView>
     );
   }
@@ -48,10 +56,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  particlePicker: {
+    position: 'absolute',
+    bottom: 100,
+    width: '100%',
+    alignItems: 'center',
+  },
   mainView: {
-    position: 'relative',
     flex: 1,
     justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  image: {
+    flex: 1,
   },
   splash: {
     flex: 1,
@@ -60,5 +77,8 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   createButton: {
+    position: 'absolute',
+    bottom: 100,
+    width: '100%',
   },
 });

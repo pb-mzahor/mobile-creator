@@ -11,7 +11,7 @@ import {
   Button,
 } from 'react-native-elements'
 
-const splashImage = require('../../images/splash.png');
+const splashImage = require('../../assets/images/splash.png');
 
 export default class IntroScreen extends React.Component {
   create = () => {
