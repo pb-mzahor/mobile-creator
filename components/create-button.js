@@ -13,7 +13,7 @@ export default class CreateButton extends Component {
 
   render() {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity {...this.props}>
         <View style={styles.createButton}>
           <Text style={styles.plus}>+</Text>
         </View>

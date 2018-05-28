@@ -22,10 +22,17 @@ import ParticlePicker from '../../components/particle-picker';
 export default class CreatorScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.create = this.create.bind(this);
+    this.toggleParticlePicker = this.toggleParticlePicker.bind(this);
     this.state = {
       images: [],
+      showParticlePicker: false,
     }
+  }
+
+  toggleParticlePicker() {
+    this.setState(prevState => ({
+      showParticlePicker: !prevState.showParticlePicker,
+    }));
   }
 
   async create() {
@@ -39,13 +46,16 @@ export default class CreatorScreen extends React.Component {
   }
 
   render() {
+    const { showParticlePicker } = this.state;
     return (
       <SafeAreaView style={styles.mainView}>
         <Text>Hello</Text>
-        <View style={styles.particlePicker}>
-          <ParticlePicker />
-        </View>
-        <CreateButton />
+        {showParticlePicker &&
+          <View style={styles.particlePicker}>
+            <ParticlePicker />
+          </View>
+        }
+        <CreateButton onPress={this.toggleParticlePicker} />
       </SafeAreaView>
     );
   }

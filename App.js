@@ -49,7 +49,7 @@ export default class AppContainer extends React.Component {
     ]);
 
     const fontAssets = cacheFonts([
-      { 'FormatIcons': require('./assets/icons/formats.ttf') },
+      { 'FormatIcons': require('./assets/icons/pbicons.ttf') },
     ]);
 
     await Promise.all([...imageAssets, ...fontAssets]);

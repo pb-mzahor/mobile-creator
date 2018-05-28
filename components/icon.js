@@ -1,4 +1,4 @@
-import icoMoonConfig from '../assets/icons/formats.json';
+import icoMoonConfig from '../assets/icons/pbicons.json';
 import { createIconSetFromIcoMoon } from '@expo/vector-icons';
 
 const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'FormatIcons');
