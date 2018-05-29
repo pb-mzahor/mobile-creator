@@ -5,6 +5,7 @@ import {
   Text,
   View,
   Image,
+  Alert,
 } from 'react-native';
 import {
   ImagePicker,
@@ -23,9 +24,10 @@ export default class CreatorScreen extends React.Component {
   constructor(props) {
     super(props);
     this.toggleParticlePicker = this.toggleParticlePicker.bind(this);
+    this.addParticle = this.addParticle.bind(this);
     this.state = {
       images: [],
-      showParticlePicker: false,
+      showParticlePicker: true,
     }
   }
 
@@ -35,7 +37,25 @@ export default class CreatorScreen extends React.Component {
     }));
   }
 
-  async create() {
+  async addParticle({ name }) {
+    console.log(name)
+    switch (name) {
+      case 'Media':
+        await this.addMediaParticle();
+        break;
+      default:
+        Alert.alert(
+          'Sorry',
+          'We need more hands to implement all sections',
+          [
+            { text: 'OK' },
+          ],
+          { cancelable: false }
+        );
+    }
+  }
+
+  async addMediaParticle() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     if (status === 'granted') {
       const image = await ImagePicker.launchImageLibraryAsync();
@@ -52,7 +72,7 @@ export default class CreatorScreen extends React.Component {
         <Text>Hello</Text>
         {showParticlePicker &&
           <View style={styles.particlePicker}>
-            <ParticlePicker />
+            <ParticlePicker onAddParticle={this.addParticle} />
           </View>
         }
         <CreateButton onPress={this.toggleParticlePicker} />

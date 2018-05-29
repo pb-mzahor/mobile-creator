@@ -13,7 +13,7 @@ export default class ParticlePicker extends Component {
     super(props);
     this.particleTypes = [
       { name: 'Video', icon: 'format-shorts-md' },
-      { name: 'Media', icon: 'format-flip-cards-md' },
+      { name: 'Media', icon: 'image' },
       { name: 'Text', icon: 'format-list-md' },
       { name: 'Poll', icon: 'format-abstract-md' },
       { name: 'Summary', icon: 'format-abstract-md' },
@@ -26,8 +26,9 @@ export default class ParticlePicker extends Component {
   }
 
   particleButton({ name, icon }) {
+    const { onAddParticle } = this.props;
     return (
-      <TouchableOpacity key={name}>
+      <TouchableOpacity key={name} onPress={onAddParticle.bind(this, { name })}>
         <View style={styles.createButton}>
           <Icon name={icon} size={32} color="#CA81FF" />
         </View>
