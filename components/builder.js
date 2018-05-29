@@ -3,10 +3,10 @@ import {
   ScrollView,
 } from 'react-native';
 
-import Imagesection from './sections/image-section';
+import ImageSection from './sections/image-section';
 
 const sectionRegistry = {
-  'Image': Imagesection,
+  'Image': ImageSection,
 };
 
 export default class Builder extends Component {
@@ -21,7 +21,7 @@ export default class Builder extends Component {
       return null;
     }
 
-    return <section section={section} />;
+    return <Section section={section} />;
   }
 
   render() {

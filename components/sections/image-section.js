@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Imagesection extends Component {
+export default class ImageSection extends Component {
   constructor(props) {
     super(props);
     this.state = {};
