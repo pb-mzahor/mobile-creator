@@ -8,10 +8,10 @@ import {
 
 import Icon from './icon';
 
-export default class ParticlePicker extends Component {
+export default class sectionPicker extends Component {
   constructor(props) {
     super(props);
-    this.particleTypes = [
+    this.sectionTypes = [
       { name: 'Video', icon: 'format-shorts-md' },
       { name: 'Media', icon: 'image' },
       { name: 'Text', icon: 'format-list-md' },
@@ -25,10 +25,10 @@ export default class ParticlePicker extends Component {
     ]
   }
 
-  particleButton({ name, icon }) {
-    const { onAddParticle } = this.props;
+  sectionButton({ name, icon }) {
+    const { onAddsection } = this.props;
     return (
-      <TouchableOpacity key={name} onPress={onAddParticle.bind(this, { name })}>
+      <TouchableOpacity key={name} onPress={onAddsection.bind(this, { name })}>
         <View style={styles.createButton}>
           <Icon name={icon} size={32} color="#CA81FF" />
         </View>
@@ -39,14 +39,14 @@ export default class ParticlePicker extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.particleRow}>
-          {this.particleTypes.filter((item, idx) => idx < 5).map((x) =>
-            this.particleButton(x)
+        <View style={styles.sectionRow}>
+          {this.sectionTypes.filter((item, idx) => idx < 5).map((x) =>
+            this.sectionButton(x)
           )}
         </View>
-        <View style={styles.particleRow}>
-          {this.particleTypes.filter((item, idx) => idx >= 5).map((x) =>
-            this.particleButton(x)
+        <View style={styles.sectionRow}>
+          {this.sectionTypes.filter((item, idx) => idx >= 5).map((x) =>
+            this.sectionButton(x)
           )}
         </View>
       </View>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
     backgroundColor: '#fff',
   },
-  particleRow: {
+  sectionRow: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-around',

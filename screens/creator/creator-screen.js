@@ -18,30 +18,30 @@ import {
 } from 'react-native-elements';
 
 import CreateButton from '../../components/create-button';
-import ParticlePicker from '../../components/particle-picker';
+import sectionPicker from '../../components/section-picker';
 
 export default class CreatorScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleParticlePicker = this.toggleParticlePicker.bind(this);
-    this.addParticle = this.addParticle.bind(this);
+    this.togglesectionPicker = this.togglesectionPicker.bind(this);
+    this.addsection = this.addsection.bind(this);
     this.state = {
       images: [],
-      showParticlePicker: true,
+      showsectionPicker: true,
     }
   }
 
-  toggleParticlePicker() {
+  togglesectionPicker() {
     this.setState(prevState => ({
-      showParticlePicker: !prevState.showParticlePicker,
+      showsectionPicker: !prevState.showsectionPicker,
     }));
   }
 
-  async addParticle({ name }) {
+  async addsection({ name }) {
     console.log(name)
     switch (name) {
       case 'Media':
-        await this.addMediaParticle();
+        await this.addMediasection();
         break;
       default:
         Alert.alert(
@@ -55,7 +55,7 @@ export default class CreatorScreen extends React.Component {
     }
   }
 
-  async addMediaParticle() {
+  async addMediasection() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     if (status === 'granted') {
       const image = await ImagePicker.launchImageLibraryAsync();
@@ -66,16 +66,16 @@ export default class CreatorScreen extends React.Component {
   }
 
   render() {
-    const { showParticlePicker } = this.state;
+    const { showsectionPicker } = this.state;
     return (
       <SafeAreaView style={styles.mainView}>
         <Text>Hello</Text>
-        {showParticlePicker &&
-          <View style={styles.particlePicker}>
-            <ParticlePicker onAddParticle={this.addParticle} />
+        {showsectionPicker &&
+          <View style={styles.sectionPicker}>
+            <sectionPicker onAddsection={this.addsection} />
           </View>
         }
-        <CreateButton onPress={this.toggleParticlePicker} />
+        <CreateButton onPress={this.togglesectionPicker} />
       </SafeAreaView>
     );
   }
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  particlePicker: {
+  sectionPicker: {
     position: 'absolute',
     bottom: 100,
     width: '100%',
